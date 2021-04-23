@@ -1,11 +1,9 @@
 <template>
-  <div class="home">
-    Home Page
-  </div>
+  <div>Register</div>
 </template>
 
 <script>
 export default {
-  name: 'Home'
+  name: 'McvRegister'
 };
 </script>
