@@ -8,6 +8,10 @@
             <router-link :to="{name: 'login'}">Need an account?</router-link>
           </p>
           <!-- VALIDATION ERRORS GO HERE-->
+          <McvValidationErrors
+            v-if="validationErrors"
+            :validation-errors="validationErrors"
+          />
           <form @submit.prevent="onSubmit">
             <fieldset class="form-group">
               <input
@@ -15,10 +19,6 @@
                 class="form-control form-control-lg"
                 placeholder="Username"
                 v-model="username"
-              />
-              <McvValidationErrors
-                v-if="validationErrors"
-                :validation-errors="validationErrors"
               />
             </fieldset>
             <fieldset class="form-group">
