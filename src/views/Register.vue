@@ -71,6 +71,7 @@ export default {
         })
         .then(user => {
           console.log('successfully registered user', user);
+          this.$router.push({name: 'home'});
         });
     }
   }

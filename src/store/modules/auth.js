@@ -14,13 +14,11 @@ const actions = {
       authApi
         .register(credentials)
         .then(res => {
-          console.log('response', res);
           context.commit('registerSuccess', res.data.user);
           resolve(res.data.user);
         })
         .catch(result => {
           context.commit('registerFail', result.response.data.errors);
-          console.log('result errors', result);
         });
     });
   }
