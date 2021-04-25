@@ -16,6 +16,10 @@
                 placeholder="Username"
                 v-model="username"
               />
+              <McvValidationErrors
+                v-if="validationErrors"
+                :validation-errors="validationErrors"
+              />
             </fieldset>
             <fieldset class="form-group">
               <input
@@ -47,8 +51,12 @@
 </template>
 
 <script>
+import McvValidationErrors from '@/components/ValidationErrors';
 export default {
   name: 'McvRegister',
+  components: {
+    McvValidationErrors
+  },
   data() {
     return {
       username: '',
@@ -59,6 +67,9 @@ export default {
   computed: {
     isSubmitting() {
       return this.$store.state.auth.isSubmitting;
+    },
+    validationErrors() {
+      return this.$store.state.auth.validationErrors;
     }
   },
   methods: {
