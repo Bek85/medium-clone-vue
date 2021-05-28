@@ -9,7 +9,8 @@ const state = {
 };
 
 export const actionTypes = {
-  register: '[auth] register'
+  register: '[auth] register',
+  login: '[auth] login'
 };
 
 const actions = {
@@ -27,13 +28,31 @@ const actions = {
           commit(mutationTypes.registerFailure, result.response.data.errors);
         });
     });
+  },
+  [actionTypes.login]({ commit }, credentials) {
+    return new Promise(resolve => {
+      commit(mutationTypes.loginStart);
+      authApi
+        .login(credentials)
+        .then(res => {
+          commit(mutationTypes.loginSuccess, res.data.user);
+          setItem('accessToken', res.data.user.token);
+          resolve(res.data.user);
+        })
+        .catch(result => {
+          commit(mutationTypes.loginFailure, result.response.data.errors);
+        });
+    });
   }
 };
 
 export const mutationTypes = {
   registerStart: '[auth] registerStart',
   registerSuccess: '[auth] registerSuccess',
-  registerFailure: '[auth] registerFailure'
+  registerFailure: '[auth] registerFailure',
+  loginStart: '[auth] loginStart',
+  loginSuccess: '[auth] loginSuccess',
+  loginFailure: '[auth] loginFailure'
 };
 
 const mutations = {
@@ -47,6 +66,19 @@ const mutations = {
     state.isLoggedIn = true;
   },
   [mutationTypes.registerFailure](state, payload) {
+    state.isSubmitting = false;
+    state.validationErrors = payload;
+  },
+  [mutationTypes.loginStart](state) {
+    state.isSubmitting = true;
+    state.validationErrors = null;
+  },
+  [mutationTypes.loginSuccess](state, payload) {
+    state.isSubmitting = false;
+    state.currentUser = payload;
+    state.isLoggedIn = true;
+  },
+  [mutationTypes.loginFailure](state, payload) {
     state.isSubmitting = false;
     state.validationErrors = payload;
   }
