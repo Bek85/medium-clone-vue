@@ -5,7 +5,7 @@
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">Sign Up</h1>
           <p class="text-xs-center">
-            <router-link :to="{name: 'login'}">Need an account?</router-link>
+            <router-link :to="{ name: 'login' }">Need an account?</router-link>
           </p>
           <!-- VALIDATION ERRORS GO HERE-->
           <McvValidationErrors
@@ -52,6 +52,7 @@
 
 <script>
 import McvValidationErrors from '@/components/ValidationErrors';
+import { actionTypes } from '@/store/modules/auth';
 export default {
   name: 'McvRegister',
   components: {
@@ -75,14 +76,14 @@ export default {
   methods: {
     onSubmit() {
       this.$store
-        .dispatch('register', {
+        .dispatch(actionTypes.register, {
           username: this.username,
           email: this.email,
           password: this.password
         })
         .then(user => {
           console.log('successfully registered user', user);
-          this.$router.push({name: 'home'});
+          this.$router.push({ name: 'home' });
         });
     }
   }
