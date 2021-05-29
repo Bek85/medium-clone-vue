@@ -3,9 +3,11 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign Up</h1>
+          <h1 class="text-xs-center">Sign In</h1>
           <p class="text-xs-center">
-            <router-link :to="{ name: 'login' }">Have an account?</router-link>
+            <router-link :to="{ name: 'register' }"
+              >Need an account?</router-link
+            >
           </p>
           <!-- VALIDATION ERRORS GO HERE-->
           <McvValidationErrors
@@ -13,14 +15,6 @@
             :validation-errors="validationErrors"
           />
           <form @submit.prevent="onSubmit">
-            <fieldset class="form-group">
-              <input
-                type="text"
-                class="form-control form-control-lg"
-                placeholder="Username"
-                v-model="username"
-              />
-            </fieldset>
             <fieldset class="form-group">
               <input
                 type="email"
@@ -41,7 +35,7 @@
               class="btn btn-lg btn-primary pull-xs-right"
               :disabled="isSubmitting"
             >
-              Sign Up
+              Sign In
             </button>
           </form>
         </div>
@@ -54,13 +48,12 @@
 import McvValidationErrors from '@/components/ValidationErrors';
 import { actionTypes } from '@/store/modules/auth';
 export default {
-  name: 'McvRegister',
+  name: 'McvLogin',
   components: {
     McvValidationErrors
   },
   data() {
     return {
-      username: '',
       email: '',
       password: ''
     };
@@ -76,13 +69,12 @@ export default {
   methods: {
     onSubmit() {
       this.$store
-        .dispatch(actionTypes.register, {
-          username: this.username,
+        .dispatch(actionTypes.login, {
           email: this.email,
           password: this.password
         })
         .then(user => {
-          console.log('successfully registered user', user);
+          console.log('successfully logged in', user);
           this.$router.push({ name: 'home' });
         });
     }
