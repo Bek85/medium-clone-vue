@@ -3,6 +3,7 @@ import { setItem } from '@/helpers/persistantStorage';
 
 const state = {
   isSubmitting: false,
+  isLoading: false,
   currentUser: null,
   validationErrors: null,
   isLoggedIn: null
@@ -10,7 +11,8 @@ const state = {
 
 export const actionTypes = {
   register: '[auth] register',
-  login: '[auth] login'
+  login: '[auth] login',
+  getCurrentUser: '[auth] getCurrentUser'
 };
 
 export const getterTypes = {
@@ -61,6 +63,20 @@ const actions = {
           commit(mutationTypes.loginFailure, result.response.data.errors);
         });
     });
+  },
+  [actionTypes.getCurrentUser]({ commit }) {
+    return new Promise(resolve => {
+      commit(mutationTypes.getCurrentUserStart);
+      authApi
+        .getCurrentUser()
+        .then(res => {
+          commit(mutationTypes.getCurrentUserSuccess, res.data.user);
+          resolve(res.data.user);
+        })
+        .catch(() => {
+          commit(mutationTypes.getCurrentUserFailure);
+        });
+    });
   }
 };
 
@@ -70,7 +86,10 @@ export const mutationTypes = {
   registerFailure: '[auth] registerFailure',
   loginStart: '[auth] loginStart',
   loginSuccess: '[auth] loginSuccess',
-  loginFailure: '[auth] loginFailure'
+  loginFailure: '[auth] loginFailure',
+  getCurrentUserStart: '[auth] getCurrentUserStart',
+  getCurrentUserSuccess: '[auth] getCurrentUserSuccess',
+  getCurrentUserFailure: '[auth] getCurrentUserFailure'
 };
 
 const mutations = {
@@ -99,6 +118,19 @@ const mutations = {
   [mutationTypes.loginFailure](state, payload) {
     state.isSubmitting = false;
     state.validationErrors = payload;
+  },
+  [mutationTypes.getCurrentUserStart](state) {
+    state.isLoading = true;
+  },
+  [mutationTypes.getCurrentUserSuccess](state, payload) {
+    state.isLoading = false;
+    state.currentUser = payload;
+    state.isLoggedIn = true;
+  },
+  [mutationTypes.getCurrentUserFailure](state) {
+    state.isLoading = false;
+    state.isLoggedIn = false;
+    state.currentUser = null;
   }
 };
 
