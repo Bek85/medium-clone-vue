@@ -13,6 +13,12 @@ export const actionTypes = {
   login: '[auth] login'
 };
 
+const getters = {
+  currentUser: state => {
+    return state.currentUser;
+  }
+};
+
 const actions = {
   [actionTypes.register]({ commit }, credentials) {
     return new Promise(resolve => {
@@ -87,5 +93,6 @@ const mutations = {
 export default {
   state,
   actions,
+  getters,
   mutations
 };

@@ -80,9 +80,12 @@ export default {
   name: 'McvTopbar',
   computed: {
     ...mapState({
-      isLoggedIn: state => state.auth.isLoggedIn,
-      currentUser: state => state.auth.currentUser
-    })
+      isLoggedIn: state => state.auth.isLoggedIn
+      // currentUser: state => state.auth.currentUser
+    }),
+    currentUser() {
+      return this.$store.getters.currentUser;
+    }
   }
 };
 </script>
