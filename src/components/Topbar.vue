@@ -49,7 +49,7 @@
             </router-link>
           </li>
         </template>
-        <template v-if="!isLoggedIn">
+        <template v-if="isAnonymous">
           <li class="nav-item">
             <router-link
               class="nav-link"
@@ -81,11 +81,17 @@ export default {
   name: 'McvTopbar',
   computed: {
     ...mapState({
-      isLoggedIn: state => state.auth.isLoggedIn
+      // isLoggedIn: state => state.auth.isLoggedIn
       // currentUser: state => state.auth.currentUser
     }),
     currentUser() {
       return this.$store.getters[getterTypes.currentUser];
+    },
+    isLoggedIn() {
+      return this.$store.getters[getterTypes.isLoggedIn];
+    },
+    isAnonymous() {
+      return this.$store.getters[getterTypes.isAnonymous];
     }
   }
 };

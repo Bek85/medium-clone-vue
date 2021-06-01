@@ -14,12 +14,20 @@ export const actionTypes = {
 };
 
 export const getterTypes = {
-  currentUser: '[auth] currentUser'
+  currentUser: '[auth] currentUser',
+  isLoggedIn: '[auth] isLoggedIn',
+  isAnonymous: '[auth] is Anonymous'
 };
 
 const getters = {
   [getterTypes.currentUser]: state => {
     return state.currentUser;
+  },
+  [getterTypes.isLoggedIn]: state => {
+    return Boolean(state.isLoggedIn);
+  },
+  [getterTypes.isAnonymous]: state => {
+    return state.isLoggedIn === false;
   }
 };
 
