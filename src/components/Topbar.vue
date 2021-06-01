@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-light">
     <div class="container">
-      <router-link class="navbar-brand" :to="{ name: 'home' }"
+      <router-link class="navbar-brand" :to="{ name: 'globalFeed' }"
         >Medium Clone</router-link
       >
       <ul class="nav navbar-nav pull-xs-right">
@@ -9,7 +9,7 @@
           <router-link
             class="nav-link"
             active-class="active"
-            :to="{ name: 'home' }"
+            :to="{ name: 'globalFeed' }"
             exact
             >Home</router-link
           >
@@ -43,7 +43,12 @@
                 params: { slug: currentUser.username }
               }"
             >
-              <img class="user-pic" :src="currentUser.image" alt="" />
+              <img
+                class="user-pic"
+                :src="currentUser.image ? currentUser.image : 'user.png'"
+                alt=""
+              />
+
               &nbsp;
               {{ currentUser.username }}
             </router-link>

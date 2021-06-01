@@ -80,7 +80,7 @@ export default {
         })
         .then(user => {
           console.log('successfully logged in', user);
-          this.$router.push({ name: 'home' });
+          this.$router.push({ name: 'globalFeed' });
         });
     }
   }
