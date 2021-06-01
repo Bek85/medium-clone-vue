@@ -13,8 +13,12 @@ export const actionTypes = {
   login: '[auth] login'
 };
 
+export const getterTypes = {
+  currentUser: '[auth] currentUser'
+};
+
 const getters = {
-  currentUser: state => {
+  [getterTypes.currentUser]: state => {
     return state.currentUser;
   }
 };

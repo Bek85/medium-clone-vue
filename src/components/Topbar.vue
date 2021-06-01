@@ -76,6 +76,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { getterTypes } from '@/store/modules/auth';
 export default {
   name: 'McvTopbar',
   computed: {
@@ -84,7 +85,7 @@ export default {
       // currentUser: state => state.auth.currentUser
     }),
     currentUser() {
-      return this.$store.getters.currentUser;
+      return this.$store.getters[getterTypes.currentUser];
     }
   }
 };
