@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-light">
-    <div class="container">
+    <div class="container-fluid">
       <router-link class="navbar-brand" :to="{ name: 'globalFeed' }"
         >Medium Clone</router-link
       >
