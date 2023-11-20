@@ -54,6 +54,8 @@
 
 <script>
 import McvValidationErrors from '@/components/ValidationErrors.vue';
+import { actionTypes } from '@/store/modules/auth';
+
 export default {
   name: 'McvRegister',
   components: {
@@ -78,7 +80,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch('register', {
+      this.$store.dispatch(actionTypes.register, {
         user: {
           email: this.email,
           username: this.username,
