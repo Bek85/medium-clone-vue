@@ -1,5 +1,6 @@
 import authApi from '@/api/authApi';
 import router from '@/router';
+import { setItem } from '@/helpers/persistToStorage';
 
 const state = {
   isSubmitting: false,
@@ -31,6 +32,7 @@ const actions = {
       context.commit('registerStart');
       const res = await authApi.register(credentials);
       context.commit('registerSuccess', res.data.user);
+      setItem('accessToken', res.data.user.token);
       router.push({ name: 'home' });
     } catch (error) {
       context.commit('registerFailure', error.response.data.errors);
