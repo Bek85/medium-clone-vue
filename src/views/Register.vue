@@ -53,7 +53,13 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch('register');
+      this.$store.dispatch('register', {
+        user: {
+          email: 'test2.webdev@gmail.com',
+          username: 'Alex19852',
+          password: '123456',
+        },
+      });
     },
   },
 };
