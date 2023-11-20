@@ -33,6 +33,8 @@
             <button class="btn btn-lg btn-primary pull-xs-right">
               Sign Up
             </button>
+            <button class="btn" @click="increaseCounter">Increase</button>
+            {{ count }}
           </form>
         </div>
       </div>
@@ -43,10 +45,19 @@
 <script>
 export default {
   name: 'McvRegister',
-  methods: {
-    onSubmit() {
-      console.log('submitted form')
+  computed: {
+    count() {
+      return this.$store.state.count;
     },
   },
-}
+  methods: {
+    onSubmit() {
+      console.log('submitted form');
+    },
+    increaseCounter() {
+      console.log('increase counter method triggered');
+      this.$store.commit('increase');
+    },
+  },
+};
 </script>
