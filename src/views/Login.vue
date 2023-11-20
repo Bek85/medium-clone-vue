@@ -5,18 +5,12 @@
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">Login</h1>
           <p class="text-xs-center">
-            <router-link :to="{ name: 'register' }">Need an account? </router-link>
+            <router-link :to="{ name: 'register' }"
+              >Need an account?
+            </router-link>
           </p>
           VALIDATION ERRORS
           <form @submit.prevent="onSubmit">
-            <fieldset class="form-group">
-              <input
-                v-model="username"
-                type="text"
-                class="form-control form-control-lg"
-                placeholder="Username"
-              />
-            </fieldset>
             <fieldset class="form-group">
               <input
                 type="text"
@@ -37,7 +31,7 @@
               :disabled="isSubmitting"
               class="btn btn-lg btn-primary pull-xs-right"
             >
-             Login
+              Login
             </button>
           </form>
         </div>
@@ -52,7 +46,6 @@ export default {
   data() {
     return {
       email: '',
-      username: '',
       password: '',
     };
   },
@@ -67,7 +60,6 @@ export default {
       this.$store.dispatch('register', {
         user: {
           email: this.email,
-          username: this.username,
           password: this.password,
         },
       });

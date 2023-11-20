@@ -33,7 +33,8 @@ const mutations = {
 };
 
 export const actionTypes = {
-  register: '[auth] register'
+  register: '[auth] register',
+  login: '[auth] login'
 }
 
 const actions = {
@@ -48,6 +49,18 @@ const actions = {
       context.commit(mutationTypes.registerFailure, error.response.data.errors);
     }
   },
+
+  async [actionTypes.login](context, credentials) {
+    try {
+      const res = await authApi.login(credentials);
+      console.log(res)
+
+
+    } catch (error) {
+      console.log(error)
+
+    }
+  }
 };
 
 export default {
