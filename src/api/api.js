@@ -1,17 +1,29 @@
 import axios from 'axios';
+import { getItem } from '@/helpers/persistToStorage';
 
 // Default config for the axios instance
 const axiosParams = {
   // Set different base URL based on the environment
   // baseURL:
   //   process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : '/',
-  baseURL: 'https://conduit.productionready.io/api',
+  // baseURL: 'https://conduit.productionready.io/api',
+  baseURL: 'https://api.realworld.io/api'
   // You can also use an environmental variable
   // baseURL: process.env.VUE_APP_API_BASE_URL
 };
 
 // Create axios instance with default params
 const axiosInstance = axios.create(axiosParams);
+
+axiosInstance.interceptors.request.use(config => {
+  const token = getItem('accessToken');
+  const authorizationToken = token ? `Token ${token}` : '';
+  config.headers.Authorization = authorizationToken;
+
+  return config;
+})
+
+
 
 // Main api function
 const api = (axios) => {

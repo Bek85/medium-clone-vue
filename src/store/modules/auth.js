@@ -4,6 +4,7 @@ import { setItem } from '@/helpers/persistToStorage';
 
 const state = {
   isSubmitting: false,
+  isLoading: false,
   currentUser: null,
   validationErrors: null,
   isLoggedIn: null,
@@ -16,7 +17,11 @@ export const mutationTypes = {
 
   loginStart: '[auth] loginStart',
   loginSuccess: '[auth] loginSuccess',
-  loginFailure: '[auth] registerFailure'
+  loginFailure: '[auth] loginFailure',
+
+  getCurrentUserStart: '[auth] getCurrentUserStart',
+  getCurrentUserSuccess: '[auth] getCurrentUserSuccess',
+  getCurrentUserFailure: '[auth] getCurrentUserFailure'
 }
 
 const mutations = {
@@ -46,13 +51,26 @@ const mutations = {
   [mutationTypes.loginFailure](state, payload) {
     state.isSubmitting = false;
     state.validationErrors = payload;
-
+  },
+  [mutationTypes.getCurrentUserStart](state) {
+    state.isLoading = true
+    },
+  [mutationTypes.getCurrentUserSuccess](state, payload) {
+    state.currentUser = payload;
+    state.isLoading = false;
+    state.isLoggedIn = true;
+  },
+  [mutationTypes.getCurrentUserFailure](state) {
+    state.isLoading = false;
+    state.isLoggedIn = false;
+    state.currentUser = null;
   }
 };
 
 export const actionTypes = {
   register: '[auth] register',
-  login: '[auth] login'
+  login: '[auth] login',
+  getCurrentUser: '[auth] getCurrentUser'
 }
 
 export const getterTypes = {
@@ -95,6 +113,17 @@ const actions = {
       router.push({ name: 'home' });
     } catch (error) {
       context.commit(mutationTypes.loginFailure, error.response.data.errors);
+    }
+  },
+
+   async [actionTypes.getCurrentUser](context) {
+    try {
+      context.commit(mutationTypes.getCurrentUserStart);
+      const res = await authApi.getCurrentUser();
+      context.commit(mutationTypes.getCurrentUserSuccess, res.data.user);
+      router.push({ name: 'home' });
+    } catch {
+      context.commit(mutationTypes.getCurrentUserFailure);
     }
   },
 };
