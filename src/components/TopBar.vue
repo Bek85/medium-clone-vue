@@ -1,23 +1,23 @@
 <template>
   <nav class="navbar navbar-light">
     <div class="container">
-      <router-link class="navbar-brand" :to="{ name: 'home' }"
+      <router-link class="navbar-brand" :to="{ name: 'globalFeed' }"
         >Medium Clone</router-link
       >
       <ul class="nav navbar-nav pull-xs-right">
         <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'home' }">
+          <router-link class="nav-link" :to="{ name: 'globalFeed' }">
             Home
           </router-link>
         </li>
         <template v-if="isLoggedIn">
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'home' }">
+            <router-link class="nav-link" :to="{ name: 'globalFeed' }">
               <i class="ion-compose"></i> &nbsp; New Article
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'home' }">
+            <router-link class="nav-link" :to="{ name: 'globalFeed' }">
               <i class="ion-gear-a"></i> &nbsp; Settings
             </router-link>
           </li>
@@ -25,7 +25,7 @@
             <router-link
               class="nav-link"
               :to="{
-                name: 'home',
+                name: 'globalFeed',
                 params: { slug: currentUser.username },
               }"
             >

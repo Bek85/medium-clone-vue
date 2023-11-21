@@ -98,7 +98,7 @@ const actions = {
       const res = await authApi.register(credentials);
       context.commit(mutationTypes.registerSuccess, res.data.user);
       setItem('accessToken', res.data.user.token);
-      router.push({ name: 'home' });
+      router.push({ name: 'globalFeed' });
     } catch (error) {
       context.commit(mutationTypes.registerFailure, error.response.data.errors);
     }
@@ -110,7 +110,7 @@ const actions = {
       const res = await authApi.login(credentials);
       context.commit(mutationTypes.loginSuccess, res.data.user);
       setItem('accessToken', res.data.user.token);
-      router.push({ name: 'home' });
+      router.push({ name: 'globalFeed' });
     } catch (error) {
       context.commit(mutationTypes.loginFailure, error.response.data.errors);
     }
@@ -121,7 +121,7 @@ const actions = {
       context.commit(mutationTypes.getCurrentUserStart);
       const res = await authApi.getCurrentUser();
       context.commit(mutationTypes.getCurrentUserSuccess, res.data.user);
-      router.push({ name: 'home' });
+      router.push({ name: 'globalFeed' });
     } catch {
       context.commit(mutationTypes.getCurrentUserFailure);
     }
