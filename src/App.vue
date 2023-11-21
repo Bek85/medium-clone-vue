@@ -1,6 +1,17 @@
 <template>
   <div id="app">
-    Hello Medium Clone
+    <TopBar />
     <router-view />
   </div>
 </template>
+
+<script>
+import TopBar from '@/components/TopBar.vue';
+
+export default {
+  name: 'McvApp',
+  components: {
+    TopBar,
+  },
+};
+</script>
