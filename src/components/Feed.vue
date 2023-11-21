@@ -20,7 +20,10 @@
           <div class="info">
             <router-link
               class="author"
-              to="{name: userProfile}, params: {slug: article.author.username}"
+              :to="{
+                name: 'userProfile',
+                params: { slug: 'article.author.username' },
+              }"
             >
               {{ article.author.username }}
             </router-link>
@@ -30,7 +33,7 @@
         </div>
         <router-link
           class="preview-link"
-          to="{name: 'article', params: {slug: article.slug}}"
+          :to="{ name: 'article', params: { slug: article.slug } }"
         >
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
