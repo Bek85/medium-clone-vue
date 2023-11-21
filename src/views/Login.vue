@@ -9,7 +9,10 @@
               >Need an account?
             </router-link>
           </p>
-          VALIDATION ERRORS
+          <McvValidationErrors
+            v-if="validationErrors"
+            :validation-errors="validationErrors"
+          />
           <form @submit.prevent="onSubmit">
             <fieldset class="form-group">
               <input
@@ -41,8 +44,15 @@
 </template>
 
 <script>
+import McvValidationErrors from '@/components/ValidationErrors.vue';
+import { actionTypes } from '@/store/modules/auth';
+import { mapState } from 'vuex';
+
 export default {
   name: 'McvLogin',
+  components: {
+    McvValidationErrors,
+  },
   data() {
     return {
       email: '',
@@ -51,17 +61,22 @@ export default {
   },
 
   computed: {
-    isSubmitting() {
-      return this.$store.state.auth.isSubmitting;
-    },
+    ...mapState({
+      isSubmitting: (state) => state.auth.isSubmitting,
+      validationErrors: (state) => state.auth.validationErrors,
+    }),
+    // isSubmitting() {
+    //   return this.$store.state.auth.isSubmitting;
+    // },
+    // validationErrors() {
+    //   return this.$store.state.auth.validationErrors;
+    // },
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch('register', {
-        user: {
-          email: this.email,
-          password: this.password,
-        },
+      this.$store.dispatch(actionTypes.login, {
+        email: this.email,
+        password: this.password,
       });
     },
   },

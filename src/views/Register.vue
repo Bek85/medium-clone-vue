@@ -55,6 +55,7 @@
 <script>
 import McvValidationErrors from '@/components/ValidationErrors.vue';
 import { actionTypes } from '@/store/modules/auth';
+import { mapState } from 'vuex';
 
 export default {
   name: 'McvRegister',
@@ -71,21 +72,17 @@ export default {
   },
 
   computed: {
-    isSubmitting() {
-      return this.$store.state.auth.isSubmitting;
-    },
-    validationErrors() {
-      return this.$store.state.auth.validationErrors;
-    },
+    ...mapState({
+      isSubmitting: (state) => state.auth.isSubmitting,
+      validationErrors: (state) => state.auth.validationErrors,
+    }),
   },
   methods: {
     onSubmit() {
       this.$store.dispatch(actionTypes.register, {
-        user: {
-          email: this.email,
-          username: this.username,
-          password: this.password,
-        },
+        email: this.email,
+        username: this.username,
+        password: this.password,
       });
     },
   },
