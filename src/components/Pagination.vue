@@ -46,3 +46,15 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+ul {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+li {
+  margin-bottom: 10px;
+}
+</style>
