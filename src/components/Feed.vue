@@ -22,7 +22,7 @@
               class="author"
               :to="{
                 name: 'userProfile',
-                params: { slug: 'article.author.username' },
+                params: { slug: article.author.username },
               }"
             >
               {{ article.author.username }}
