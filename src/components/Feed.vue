@@ -41,7 +41,12 @@
         </router-link>
       </div>
 
-      <McvPagination :total="total" :limit="limit" />
+      <McvPagination
+        :total="total"
+        :limit="limit"
+        :current-page="currentPage"
+        :url="url"
+      />
     </div>
   </div>
 </template>
@@ -65,6 +70,8 @@ export default {
     return {
       total: 500,
       limit: 10,
+      currentPage: 5,
+      url: '/',
     };
   },
   computed: {
