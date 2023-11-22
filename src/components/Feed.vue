@@ -56,7 +56,7 @@ import { mapState } from 'vuex';
 import { actionTypes } from '@/store/modules/feed';
 import McvPagination from '@/components/Pagination.vue';
 import { limit } from '@/helpers/constants';
-import { parse } from 'query-string';
+import queryString from 'query-string';
 
 export default {
   name: 'McvFeed',
@@ -98,7 +98,7 @@ export default {
   },
   methods: {
     fetchFeed() {
-      const parsedUrl = parse(this.apiUrl);
+      const parsedUrl = queryString.parseUrl(this.apiUrl);
       console.log(parsedUrl);
       console.log(this.$route.query);
       this.$store.dispatch(actionTypes.getFeed);
