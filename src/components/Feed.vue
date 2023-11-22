@@ -86,6 +86,9 @@ export default {
     baseUrl() {
       return this.$route.path;
     },
+    offset() {
+      return this.currentPage * limit - limit;
+    },
   },
   watch: {
     currentPage() {
@@ -99,9 +102,13 @@ export default {
   methods: {
     fetchFeed() {
       const parsedUrl = queryString.parseUrl(this.apiUrl);
-      console.log(parsedUrl);
-      console.log(this.$route.query);
-      this.$store.dispatch(actionTypes.getFeed);
+      const stringifiedParams = queryString.stringify({
+        limit,
+        offset: this.offset,
+        ...parsedUrl.query,
+      });
+
+      this.$store.dispatch(actionTypes.getFeed, stringifiedParams);
     },
   },
 };
