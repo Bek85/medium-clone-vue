@@ -42,10 +42,10 @@
       </div>
 
       <McvPagination
-        :total="total"
+        :total="feed.articlesCount"
         :limit="limit"
         :current-page="currentPage"
-        :url="url"
+        :url="baseUrl"
       />
     </div>
   </div>
@@ -55,6 +55,7 @@
 import { mapState } from 'vuex';
 import { actionTypes } from '@/store/modules/feed';
 import McvPagination from '@/components/Pagination.vue';
+import { limit } from '@/helpers/constants';
 export default {
   name: 'McvFeed',
   components: {
@@ -68,10 +69,7 @@ export default {
   },
   data() {
     return {
-      total: 500,
-      limit: 10,
-      currentPage: 5,
-      url: '/',
+      limit,
     };
   },
   computed: {
@@ -80,6 +78,12 @@ export default {
       isLoading: (state) => state.feed.isLoading,
       error: (state) => state.feed.error,
     }),
+    currentPage() {
+      return +this.$route.query.page || 1;
+    },
+    baseUrl() {
+      return this.$route.path;
+    },
   },
   mounted() {
     this.$store.dispatch(actionTypes.getFeed);
