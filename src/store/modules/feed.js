@@ -32,10 +32,10 @@ export const actionTypes = {
 };
 
 const actions = {
-  async [actionTypes.getFeed](context, queryParams) {
+  async [actionTypes.getFeed](context, { apiUrl }) {
     try {
       context.commit(mutationTypes.getFeedStart);
-      const res = await feedApi.getFeed(queryParams);
+      const res = await feedApi.getFeed(apiUrl);
       context.commit(mutationTypes.getFeedSuccess, res.data);
     } catch (error) {
       context.commit(mutationTypes.getFeedFailure, error.message);

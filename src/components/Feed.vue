@@ -111,9 +111,9 @@ export default {
         offset: this.offset,
         ...parsedUrl.query,
       });
-      console.log(stringifiedParams);
+      const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`;
 
-      this.$store.dispatch(actionTypes.getFeed, stringifiedParams);
+      this.$store.dispatch(actionTypes.getFeed, { apiUrl: apiUrlWithParams });
     },
   },
 };
