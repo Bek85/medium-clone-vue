@@ -9,7 +9,7 @@ const getFeeds = (apiUrl) => {
 };
 
 const getArticle = (slug) => {
-  return api.get(`${URLS}.articleUrl/${slug}`);
+  return api.get(`${URLS.articleUrl}/${slug}`);
 };
 
 export default {
