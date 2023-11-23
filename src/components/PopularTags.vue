@@ -39,8 +39,14 @@ export default {
     }),
   },
 
+  methods: {
+    getTags() {
+      this.$store.dispatch(actionTypes.getTags);
+    },
+  },
+
   mounted() {
-    this.$store.dispatch(actionTypes.getTags);
+    this.getTags();
   },
 };
 </script>

@@ -32,7 +32,8 @@ const routes = [
   {
     path: '/tags/:slug',
     name: 'tag',
-    component: GlobalFeed,
+    component: () =>
+      import(/* webpackChunkName: "tag" */ '@/views/TagFeed.vue'),
   },
   {
     path: '/articles/:slug',
