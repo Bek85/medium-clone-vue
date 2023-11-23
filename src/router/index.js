@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import GlobalFeed from '@/views/GlobalFeed.vue';
+// import TagFeed from '@/views/TagFeed.vue';
+// import YourFeed from '@/views/YourFeed.vue';
 
 const routes = [
   {
     path: '/',
     name: 'globalFeed',
+    // component: GlobalFeed,
     component: () =>
       import(/* webpackChunkName: "globalFeed" */ '@/views/GlobalFeed.vue'),
   },
@@ -26,12 +29,14 @@ const routes = [
   {
     path: '/feed',
     name: 'yourFeed',
+    // component: YourFeed,
     component: () =>
       import(/* webpackChunkName: "feeds" */ '@/views/YourFeed.vue'),
   },
   {
     path: '/tags/:slug',
     name: 'tag',
+    // component: TagFeed,
     component: () =>
       import(/* webpackChunkName: "popularTags" */ '@/views/TagFeed.vue'),
   },
