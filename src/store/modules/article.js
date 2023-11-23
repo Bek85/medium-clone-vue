@@ -32,11 +32,11 @@ export const actionTypes = {
 };
 
 const actions = {
-  async [actionTypes.getArticle](context) {
+  async [actionTypes.getArticle](context, { slug }) {
     try {
       context.commit(mutationTypes.getArticleStart);
-      const res = await feedsApi.getArticle();
-      context.commit(mutationTypes.getArticleSuccess, res.data);
+      const res = await feedsApi.getArticle(slug);
+      context.commit(mutationTypes.getArticleSuccess, res.data.article);
     } catch (error) {
       context.commit(mutationTypes.getArticleFailure, error.message);
     }
