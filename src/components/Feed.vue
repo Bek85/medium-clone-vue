@@ -80,9 +80,9 @@ export default {
   },
   computed: {
     ...mapState({
-      feed: (state) => state.feed.feedData,
-      isLoading: (state) => state.feed.isLoading,
-      error: (state) => state.feed.error,
+      feed: (state) => state.feeds.feedData,
+      isLoading: (state) => state.feeds.isLoading,
+      error: (state) => state.feeds.error,
     }),
     currentPage() {
       return +this.$route.query.page || 1;
@@ -113,7 +113,7 @@ export default {
       });
       const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`;
 
-      this.$store.dispatch(actionTypes.getFeed, { apiUrl: apiUrlWithParams });
+      this.$store.dispatch(actionTypes.getFeeds, { apiUrl: apiUrlWithParams });
     },
   },
 };

@@ -7,39 +7,39 @@ const state = {
 };
 
 export const mutationTypes = {
-  getFeedStart: '[feed] getFeedStart',
-  getFeedSuccess: '[feed] getFeedSuccess',
-  getFeedFailure: '[feed] getFeedFailure',
+  getFeedsStart: '[feed] getFeedsStart',
+  getFeedsSuccess: '[feed] getFeedsSuccess',
+  getFeedsFailure: '[feed] getFeedsFailure',
 };
 
 const mutations = {
-  [mutationTypes.getFeedStart](state) {
+  [mutationTypes.getFeedsStart](state) {
     state.isLoading = true;
     state.feedData = null;
     state.error = null;
   },
-  [mutationTypes.getFeedSuccess](state, payload) {
+  [mutationTypes.getFeedsSuccess](state, payload) {
     state.isLoading = false;
     state.feedData = payload;
   },
-  [mutationTypes.getFeedFailure](state, payload) {
+  [mutationTypes.getFeedsFailure](state, payload) {
     state.isLoading = false;
     state.error = payload;
   },
 };
 
 export const actionTypes = {
-  getFeed: '[feed] getFeed',
+  getFeeds: '[feed] getFeeds',
 };
 
 const actions = {
-  async [actionTypes.getFeed](context, { apiUrl }) {
+  async [actionTypes.getFeeds](context, { apiUrl }) {
     try {
-      context.commit(mutationTypes.getFeedStart);
-      const res = await feedApi.getFeed(apiUrl);
-      context.commit(mutationTypes.getFeedSuccess, res.data);
+      context.commit(mutationTypes.getFeedsStart);
+      const res = await feedApi.getFeeds(apiUrl);
+      context.commit(mutationTypes.getFeedsSuccess, res.data);
     } catch (error) {
-      context.commit(mutationTypes.getFeedFailure, error.message);
+      context.commit(mutationTypes.getFeedsFailure, error.message);
     }
   },
 };

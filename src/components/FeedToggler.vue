@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { getterTypes } from '@/store/modules/auth';
+// import { mapGetters } from 'vuex';
+// import { getterTypes } from '@/store/modules/auth';
 
 export default {
   name: 'McvFeedToggler',
@@ -44,9 +44,9 @@ export default {
     },
   },
   computed: {
-    ...mapGetters({
-      isLoggedIn: getterTypes.isLoggedIn,
-    }),
+    // ...mapGetters({
+    //   isLoggedIn: getterTypes.isLoggedIn,
+    // }),
     routeName() {
       return this.$route.name;
     },
