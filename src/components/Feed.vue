@@ -80,7 +80,7 @@ export default {
   },
   computed: {
     ...mapState({
-      feed: (state) => state.feed.data,
+      feed: (state) => state.feed.feedData,
       isLoading: (state) => state.feed.isLoading,
       error: (state) => state.feed.error,
     }),

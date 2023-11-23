@@ -1,7 +1,7 @@
 import feedApi from '@/api/feedApi';
 
 const state = {
-  data: null,
+  feedData: null,
   isLoading: false,
   error: null,
 };
@@ -15,11 +15,11 @@ export const mutationTypes = {
 const mutations = {
   [mutationTypes.getFeedStart](state) {
     state.isLoading = true;
-    state.data = null;
+    state.feedData = null;
   },
   [mutationTypes.getFeedSuccess](state, payload) {
     state.isLoading = false;
-    state.data = payload;
+    state.feedData = payload;
   },
   [mutationTypes.getFeedFailure](state, payload) {
     state.isLoading = false;
