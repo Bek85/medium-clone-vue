@@ -1,4 +1,4 @@
-import feedApi from '@/api/feedApi';
+import feedApi from '@/api/feedsApi';
 
 const state = {
   feedData: null,
