@@ -21,8 +21,9 @@ const mutations = {
     state.isLoading = false;
     state.tags = payload;
   },
-  [mutationTypes.getTagsFailure](state) {
+  [mutationTypes.getTagsFailure](state, payload) {
     state.isLoading = false;
+    state.error = payload;
   },
 };
 
@@ -36,8 +37,8 @@ const actions = {
       context.commit(mutationTypes.getTagsStart);
       const res = await tagsApi.getPopularTags();
       context.commit(mutationTypes.getTagsSuccess, res.data.tags);
-    } catch {
-      context.commit(mutationTypes.getTagsFailure);
+    } catch (error) {
+      context.commit(mutationTypes.getTagsFailure, error.message);
     }
   },
 };

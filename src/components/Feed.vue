@@ -1,7 +1,7 @@
 <template>
   <div>
     <McvSpinner v-if="isLoading" />
-    <div v-if="error">Oops, something went wrong...</div>
+    <McvErrorMessage v-if="error" :message="error" />
     <div v-if="feed">
       <div
         class="article-preview"
@@ -58,12 +58,14 @@ import McvPagination from '@/components/Pagination.vue';
 import { limit } from '@/helpers/constants';
 import queryString from 'query-string';
 import McvSpinner from './Spinner.vue';
+import McvErrorMessage from './ErrorMessage.vue';
 
 export default {
   name: 'McvFeed',
   components: {
     McvPagination,
     McvSpinner,
+    McvErrorMessage,
   },
   props: {
     apiUrl: {

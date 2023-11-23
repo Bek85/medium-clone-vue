@@ -21,8 +21,9 @@ const mutations = {
     state.isLoading = false;
     state.data = payload;
   },
-  [mutationTypes.getFeedFailure](state) {
+  [mutationTypes.getFeedFailure](state, payload) {
     state.isLoading = false;
+    state.error = payload;
   },
 };
 
@@ -36,8 +37,8 @@ const actions = {
       context.commit(mutationTypes.getFeedStart);
       const res = await feedApi.getFeed(queryParams);
       context.commit(mutationTypes.getFeedSuccess, res.data);
-    } catch {
-      context.commit(mutationTypes.getFeedFailure);
+    } catch (error) {
+      context.commit(mutationTypes.getFeedFailure, error.message);
     }
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div>
     <McvSpinner v-if="isLoading" />
-    <div v-if="error">Something went wrong...</div>
+    <McvErrorMessage v-if="error" :message="error" />
     <div class="sidebar" v-if="popularTags">
       <p>Popular Tags</p>
       <div class="tag-list">
@@ -22,11 +22,13 @@
 import { actionTypes } from '@/store/modules/tags';
 import { mapState } from 'vuex';
 import McvSpinner from './Spinner.vue';
+import McvErrorMessage from './ErrorMessage.vue';
 
 export default {
   name: 'McvPopularTags',
   components: {
     McvSpinner,
+    McvErrorMessage,
   },
 
   computed: {
