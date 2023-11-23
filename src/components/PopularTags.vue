@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isLoading">Loading...</div>
+    <McvSpinner v-if="isLoading" />
     <div v-if="error">Something went wrong...</div>
     <div class="sidebar" v-if="popularTags">
       <p>Popular Tags</p>
@@ -21,9 +21,13 @@
 <script>
 import { actionTypes } from '@/store/modules/tags';
 import { mapState } from 'vuex';
+import McvSpinner from './Spinner.vue';
 
 export default {
   name: 'McvPopularTags',
+  components: {
+    McvSpinner,
+  },
 
   computed: {
     ...mapState({

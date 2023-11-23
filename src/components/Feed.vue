@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isLoading">Loading...</div>
+    <McvSpinner v-if="isLoading" />
     <div v-if="error">Oops, something went wrong...</div>
     <div v-if="feed">
       <div
@@ -57,11 +57,13 @@ import { actionTypes } from '@/store/modules/feed';
 import McvPagination from '@/components/Pagination.vue';
 import { limit } from '@/helpers/constants';
 import queryString from 'query-string';
+import McvSpinner from './Spinner.vue';
 
 export default {
   name: 'McvFeed',
   components: {
     McvPagination,
+    McvSpinner,
   },
   props: {
     apiUrl: {
