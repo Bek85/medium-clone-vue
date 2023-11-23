@@ -111,6 +111,7 @@ export default {
         offset: this.offset,
         ...parsedUrl.query,
       });
+      console.log(stringifiedParams);
 
       this.$store.dispatch(actionTypes.getFeed, stringifiedParams);
     },
