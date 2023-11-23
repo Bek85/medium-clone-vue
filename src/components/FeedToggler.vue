@@ -34,6 +34,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { getterTypes } from '@/store/modules/auth';
+
 export default {
   name: 'McvFeedToggler',
   props: {
