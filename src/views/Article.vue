@@ -89,3 +89,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+button {
+  margin-left: 10px;
+}
+</style>
