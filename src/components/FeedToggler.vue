@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 // import { mapGetters } from 'vuex';
 // import { getterTypes } from '@/store/modules/auth';
 
@@ -44,6 +45,9 @@ export default {
     },
   },
   computed: {
+    ...mapState({
+      isLoggedIn: (state) => state.auth.isLoggedIn,
+    }),
     // ...mapGetters({
     //   isLoggedIn: getterTypes.isLoggedIn,
     // }),
