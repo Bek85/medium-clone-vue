@@ -50,16 +50,7 @@
           <div>
             <p>{{ article.body }}</p>
           </div>
-
-          <div class="tag-list">
-            <span
-              v-for="tag in article.tagList"
-              :key="tag"
-              class="tag-default tag-pill"
-            >
-              {{ tag }}
-            </span>
-          </div>
+          <MvcTagList :tagList="article.tagList" />
         </div>
       </div>
     </div>
@@ -69,6 +60,7 @@
 <script>
 import McvErrorMessage from '@/components/ErrorMessage.vue';
 import McvSpinner from '@/components/Spinner.vue';
+import MvcTagList from '@/components/TagList.vue';
 import { actionTypes as articleActionType } from '@/store/modules/article';
 import { mapState, mapGetters } from 'vuex';
 import { getterTypes as authGetterTypes } from '@/store/modules/auth';
@@ -78,6 +70,7 @@ export default {
   components: {
     McvSpinner,
     McvErrorMessage,
+    MvcTagList,
   },
   computed: {
     ...mapState({
