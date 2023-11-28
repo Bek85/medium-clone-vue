@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'MvcTagList',
+  name: 'McvTagList',
   props: {
     tagList: {
       type: Array,

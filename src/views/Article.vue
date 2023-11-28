@@ -50,7 +50,7 @@
           <div>
             <p>{{ article.body }}</p>
           </div>
-          <MvcTagList :tagList="article.tagList" />
+          <McvTagList :tagList="article.tagList" />
         </div>
       </div>
     </div>
@@ -60,17 +60,17 @@
 <script>
 import McvErrorMessage from '@/components/ErrorMessage.vue';
 import McvSpinner from '@/components/Spinner.vue';
-import MvcTagList from '@/components/TagList.vue';
+import McvTagList from '@/components/TagList.vue';
 import { actionTypes as articleActionType } from '@/store/modules/article';
 import { mapState, mapGetters } from 'vuex';
 import { getterTypes as authGetterTypes } from '@/store/modules/auth';
 
 export default {
-  name: 'MvcArticle',
+  name: 'McvArticle',
   components: {
     McvSpinner,
     McvErrorMessage,
-    MvcTagList,
+    McvTagList,
   },
   computed: {
     ...mapState({
