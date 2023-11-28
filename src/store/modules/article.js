@@ -85,7 +85,10 @@ const actions = {
 
       router.push({ name: 'article', params: { slug } });
     } catch (error) {
-      context.commit(mutationTypes.createArticleFailure, error.message);
+      context.commit(
+        mutationTypes.createArticleFailure,
+        error.response.data.errors
+      );
     }
   },
 };

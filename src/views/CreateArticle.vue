@@ -1,6 +1,5 @@
 <template>
   <div>
-    Create Article Page
     <McvArticleForm
       :initial-values="initialValues"
       :errors="validationErrors"
@@ -13,6 +12,7 @@
 <script>
 import McvArticleForm from '@/components/ArticleForm.vue';
 import { actionTypes } from '@/store/modules/article';
+import { mapState } from 'vuex';
 
 export default {
   name: 'MvcCreateArticle',
@@ -28,9 +28,14 @@ export default {
         body: '',
         tagList: [],
       },
-      validationErrors: null,
-      isSubmitting: false,
     };
+  },
+
+  computed: {
+    ...mapState({
+      isSubmitting: (state) => state.article.isSubmitting,
+      validationErrors: (state) => state.article.validationErrors,
+    }),
   },
 
   methods: {
