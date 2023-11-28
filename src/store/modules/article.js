@@ -37,9 +37,16 @@ const mutations = {
   [mutationTypes.deleteArticleStart]() {},
   [mutationTypes.deleteArticleSuccess]() {},
   [mutationTypes.deleteArticleFailure]() {},
-  [mutationTypes.createArticleStart]() {},
-  [mutationTypes.createArticleSuccess]() {},
-  [mutationTypes.createArticleFailure]() {},
+  [mutationTypes.createArticleStart]() {
+    state.isSubmitting = true;
+  },
+  [mutationTypes.createArticleSuccess]() {
+    state.isSubmitting = false;
+  },
+  [mutationTypes.createArticleFailure](state, payload) {
+    state.isSubmitting = false;
+    state.validationErrors = payload;
+  },
 };
 
 export const actionTypes = {
