@@ -12,6 +12,7 @@
 
 <script>
 import McvArticleForm from '@/components/ArticleForm.vue';
+import { actionTypes } from '@/store/modules/article';
 
 export default {
   name: 'MvcCreateArticle',
@@ -34,7 +35,7 @@ export default {
 
   methods: {
     onSubmit(data) {
-      console.log('Submitting...', data);
+      this.$store.dispatch(actionTypes.createArticle, data);
     },
   },
 };

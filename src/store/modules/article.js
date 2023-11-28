@@ -5,6 +5,8 @@ const state = {
   articleData: null,
   isLoading: false,
   error: null,
+  isSubmitting: false,
+  validationErrors: null,
 };
 
 export const mutationTypes = {
@@ -14,6 +16,9 @@ export const mutationTypes = {
   deleteArticleStart: '[article] deleteArticleStart',
   deleteArticleSuccess: '[article] deleteArticleSuccess',
   deleteArticleFailure: '[article] deleteArticleFailure',
+  createArticleStart: '[article] createArticleStart',
+  createArticleSuccess: '[article] createArticleSuccess',
+  createArticleFailure: '[article] createArticleFailure',
 };
 
 const mutations = {
@@ -32,11 +37,15 @@ const mutations = {
   [mutationTypes.deleteArticleStart]() {},
   [mutationTypes.deleteArticleSuccess]() {},
   [mutationTypes.deleteArticleFailure]() {},
+  [mutationTypes.createArticleStart]() {},
+  [mutationTypes.createArticleSuccess]() {},
+  [mutationTypes.createArticleFailure]() {},
 };
 
 export const actionTypes = {
   getArticle: '[article] getArticle',
   deleteArticle: '[article] deleteArticle',
+  createArticle: '[article] createArticle',
 };
 
 const actions = {
@@ -58,6 +67,18 @@ const actions = {
       router.push({ name: 'globalFeed' });
     } catch (error) {
       context.commit(mutationTypes.deleteArticleFailure, error.message);
+    }
+  },
+  async [actionTypes.createArticle](context, formData) {
+    try {
+      context.commit(mutationTypes.createArticleStart);
+      const { data } = await feedsApi.createArticle(formData);
+      const slug = data.article.slug;
+      context.commit(mutationTypes.createArticleSuccess);
+
+      router.push({ name: 'article', params: { slug } });
+    } catch (error) {
+      context.commit(mutationTypes.createArticleFailure, error.message);
     }
   },
 };

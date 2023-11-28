@@ -16,8 +16,13 @@ const deleteArticle = (slug) => {
   return api.delete(`${URLS.articleUrl}/${slug}`);
 };
 
+const createArticle = (formData) => {
+  return api.post(URLS.articleUrl, { article: formData });
+};
+
 export default {
   getFeeds,
   getArticle,
   deleteArticle,
+  createArticle,
 };
