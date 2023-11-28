@@ -37,7 +37,8 @@
         >
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
-          <span>Read more...</span> TAG LIST
+          <span>Read more...</span>
+          <McvTagList :tagList="article.tagList" />
         </router-link>
       </div>
 
@@ -59,6 +60,7 @@ import { limit } from '@/helpers/constants';
 import queryString from 'query-string';
 import McvSpinner from './Spinner.vue';
 import McvErrorMessage from './ErrorMessage.vue';
+import McvTagList from '@/components/TagList.vue';
 
 export default {
   name: 'McvFeed',
@@ -66,6 +68,7 @@ export default {
     McvPagination,
     McvSpinner,
     McvErrorMessage,
+    McvTagList,
   },
   props: {
     apiUrl: {
