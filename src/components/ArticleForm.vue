@@ -86,12 +86,13 @@ export default {
   methods: {
     onSubmit() {
       const { title, description, body, tagList } = this;
+      tagList.split(' ');
 
       const formData = {
         title,
         description,
         body,
-        tagList,
+        tagList: tagList.split(' '),
       };
       this.$emit('articleSubmit', formData);
     },
