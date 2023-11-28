@@ -12,7 +12,12 @@ const getArticle = (slug) => {
   return api.get(`${URLS.articleUrl}/${slug}`);
 };
 
+const deleteArticle = (slug) => {
+  return api.delete(`${URLS.articleUrl}/${slug}`);
+};
+
 export default {
   getFeeds,
   getArticle,
+  deleteArticle,
 };

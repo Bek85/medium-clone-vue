@@ -31,7 +31,10 @@
               <i class="ion-edit" />
               Edit Article
             </router-link>
-            <button class="btn btn-outline-danger btn-sm">
+            <button
+              @click="deleteArticle"
+              class="btn btn-outline-danger btn-sm"
+            >
               <i class="ion-trash-a" />
               Delete Article
             </button>
@@ -95,6 +98,13 @@ export default {
     this.$store.dispatch(articleActionType.getArticle, {
       slug: this.$route.params.slug,
     });
+  },
+  methods: {
+    deleteArticle() {
+      this.$store.dispatch(articleActionType.deleteArticle, {
+        slug: this.$route.params.slug,
+      });
+    },
   },
 };
 </script>

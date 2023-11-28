@@ -1,4 +1,5 @@
 import feedsApi from '@/api/feedsApi';
+import router from '@/router';
 
 const state = {
   articleData: null,
@@ -10,6 +11,9 @@ export const mutationTypes = {
   getArticleStart: '[article] getArticleStart',
   getArticleSuccess: '[article] getArticleSuccess',
   getArticleFailure: '[article] getArticleFailure',
+  deleteArticleStart: '[article] deleteArticleStart',
+  deleteArticleSuccess: '[article] deleteArticleSuccess',
+  deleteArticleFailure: '[article] deleteArticleFailure',
 };
 
 const mutations = {
@@ -25,10 +29,14 @@ const mutations = {
     state.isLoading = false;
     state.error = payload;
   },
+  [mutationTypes.deleteArticleStart]() {},
+  [mutationTypes.deleteArticleSuccess]() {},
+  [mutationTypes.deleteArticleFailure]() {},
 };
 
 export const actionTypes = {
   getArticle: '[article] getArticle',
+  deleteArticle: '[article] deleteArticle',
 };
 
 const actions = {
@@ -39,6 +47,17 @@ const actions = {
       context.commit(mutationTypes.getArticleSuccess, res.data.article);
     } catch (error) {
       context.commit(mutationTypes.getArticleFailure, error.message);
+    }
+  },
+
+  async [actionTypes.deleteArticle](context, { slug }) {
+    try {
+      context.commit(mutationTypes.deleteArticleStart);
+      await feedsApi.deleteArticle(slug);
+      context.commit(mutationTypes.deleteArticleSuccess);
+      router.push({ name: 'globalFeed' });
+    } catch (error) {
+      context.commit(mutationTypes.deleteArticleFailure, error.message);
     }
   },
 };
