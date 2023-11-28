@@ -23,7 +23,7 @@
             </router-link>
             <span class="date">{{ article.createdAt }}</span>
           </div>
-          <span>
+          <span v-if="isAuthor">
             <router-link
               :to="{ name: 'editArticle', params: { slug: article.slug } }"
               class="btn btn-outline-secondary btn-sm"
@@ -66,8 +66,9 @@
 <script>
 import McvErrorMessage from '@/components/ErrorMessage.vue';
 import McvSpinner from '@/components/Spinner.vue';
-import { actionTypes } from '@/store/modules/article';
-import { mapState } from 'vuex';
+import { actionTypes as articleActionType } from '@/store/modules/article';
+import { mapState, mapGetters } from 'vuex';
+import { getterTypes as authGetterTypes } from '@/store/modules/auth';
 
 export default {
   name: 'MvcArticle',
@@ -81,9 +82,17 @@ export default {
       error: (state) => state.article.error,
       article: (state) => state.article.articleData,
     }),
+    ...mapGetters({
+      currentUser: authGetterTypes.currentUser,
+    }),
+    isAuthor() {
+      if (!this.currentUser || !this.article) return false;
+
+      return this.currentUser.username === this.article.author.username;
+    },
   },
   mounted() {
-    this.$store.dispatch(actionTypes.getArticle, {
+    this.$store.dispatch(articleActionType.getArticle, {
       slug: this.$route.params.slug,
     });
   },
