@@ -49,7 +49,10 @@ const routes = [
   {
     path: '/articles/new',
     name: 'createArticle',
-    component: GlobalFeed,
+    component: () =>
+      import(
+        /* webpackChunkName: "createArticle" */ '@/views/CreateArticle.vue'
+      ),
   },
   {
     path: '/articles/:slug/edit',
