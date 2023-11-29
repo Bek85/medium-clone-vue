@@ -106,7 +106,8 @@ export default {
       this.$store.dispatch(authActionTypes.updateCurrentUser, this.formValues);
     },
     logout() {
-      console.log('logging out...');
+      this.$store.dispatch(authActionTypes.logout);
+      this.$router.push({ name: 'globalFeed' });
     },
   },
 };

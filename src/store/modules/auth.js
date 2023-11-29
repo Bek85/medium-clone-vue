@@ -26,6 +26,8 @@ export const mutationTypes = {
   updateCurrentUserStart: '[auth] updateCurrentUserStart',
   updateCurrentUserSuccess: '[auth] updateCurrentUserSuccess',
   updateCurrentUserFailure: '[auth] updateCurrentUserFailure',
+
+  logout: '[auth] logout',
 };
 
 const mutations = {
@@ -76,6 +78,10 @@ const mutations = {
   [mutationTypes.updateCurrentUserFailure](state, payload) {
     state.validationErrors = payload;
   },
+  [mutationTypes.logout](state) {
+    state.currentUser = null;
+    state.isLoggedIn = false;
+  },
 };
 
 export const authActionTypes = {
@@ -83,6 +89,7 @@ export const authActionTypes = {
   login: '[auth] login',
   getCurrentUser: '[auth] getCurrentUser',
   updateCurrentUser: '[auth] updateCurrentUser',
+  logout: '[auth] logout',
 };
 
 export const getterTypes = {
@@ -164,6 +171,10 @@ const actions = {
         error.response.data.errors
       );
     }
+  },
+  [authActionTypes.logout](context) {
+    setItem('accessToken', '');
+    context.commit(mutationTypes.logout);
   },
 };
 
