@@ -63,7 +63,8 @@ const routes = [
   {
     path: '/settings',
     name: 'settings',
-    component: GlobalFeed,
+    component: () =>
+      import(/* webpackChunkName: "settings" */ '@/views/Settings.vue'),
   },
   {
     path: '/profiles/:slug',
