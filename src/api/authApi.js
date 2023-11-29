@@ -18,8 +18,13 @@ const getCurrentUser = () => {
   return api.get(URLS.currentUserUrl);
 };
 
+const updateCurrentUser = (formData) => {
+  return api.put(URLS.currentUserUrl, { user: formData });
+};
+
 export default {
   register,
   login,
   getCurrentUser,
+  updateCurrentUser,
 };
