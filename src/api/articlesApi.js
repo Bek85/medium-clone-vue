@@ -4,7 +4,7 @@ const URLS = {
   articleUrl: '/articles',
 };
 
-const getFeeds = (apiUrl) => {
+const getArticles = (apiUrl) => {
   return api.get(apiUrl);
 };
 
@@ -25,7 +25,7 @@ const updateArticle = (slug, formData) => {
 };
 
 export default {
-  getFeeds,
+  getArticles,
   getArticle,
   deleteArticle,
   createArticle,

@@ -54,7 +54,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { actionTypes } from '@/store/modules/feed';
+import { getArticlesActionTypes } from '@/store/modules/articles/getArticles';
 import McvPagination from '@/components/Pagination.vue';
 import { limit } from '@/helpers/constants';
 import queryString from 'query-string';
@@ -83,9 +83,9 @@ export default {
   },
   computed: {
     ...mapState({
-      feed: (state) => state.feeds.feedData,
-      isLoading: (state) => state.feeds.isLoading,
-      error: (state) => state.feeds.error,
+      feed: (state) => state.getArticles.articles,
+      isLoading: (state) => state.getArticles.isLoading,
+      error: (state) => state.getArticles.error,
     }),
     currentPage() {
       return +this.$route.query.page || 1;
@@ -99,15 +99,15 @@ export default {
   },
   watch: {
     currentPage() {
-      this.fetchFeed();
+      this.fetchArticles();
     },
   },
 
   mounted() {
-    this.fetchFeed();
+    this.fetchArticles();
   },
   methods: {
-    fetchFeed() {
+    fetchArticles() {
       const parsedUrl = queryString.parseUrl(this.apiUrl);
       const stringifiedParams = queryString.stringify({
         limit,
@@ -116,7 +116,9 @@ export default {
       });
       const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`;
 
-      this.$store.dispatch(actionTypes.getFeeds, { apiUrl: apiUrlWithParams });
+      this.$store.dispatch(getArticlesActionTypes.getArticles, {
+        apiUrl: apiUrlWithParams,
+      });
     },
   },
 };

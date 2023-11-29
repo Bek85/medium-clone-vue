@@ -14,7 +14,6 @@
 <script>
 import McvArticleForm from '@/components/ArticleForm.vue';
 import { getArticleActionTypes } from '@/store/modules/articles/getArticle';
-
 import { mapState } from 'vuex';
 import McvSpinner from '@/components/Spinner.vue';
 
