@@ -20,9 +20,14 @@ const createArticle = (formData) => {
   return api.post(URLS.articleUrl, { article: formData });
 };
 
+const updateArticle = (slug, formData) => {
+  return api.put(`${URLS.articleUrl}/${slug}`, formData);
+};
+
 export default {
   getFeeds,
   getArticle,
   deleteArticle,
   createArticle,
+  updateArticle,
 };
