@@ -1,7 +1,7 @@
-import feedsApi from '@/api/articlesApi';
+import articlesApi from '@/api/articlesApi';
 
 const state = {
-  articleData: null,
+  article: null,
   isLoading: false,
   error: null,
 };
@@ -15,11 +15,11 @@ export const mutationTypes = {
 const mutations = {
   [mutationTypes.getArticleStart](state) {
     state.isLoading = true;
-    state.articleData = null;
+    state.article = null;
   },
   [mutationTypes.getArticleSuccess](state, payload) {
     state.isLoading = false;
-    state.articleData = payload;
+    state.article = payload;
   },
   [mutationTypes.getArticleFailure](state, payload) {
     state.isLoading = false;
@@ -35,7 +35,7 @@ const actions = {
   async [getArticleActionTypes.getArticle](context, { slug }) {
     try {
       context.commit(mutationTypes.getArticleStart);
-      const res = await feedsApi.getArticle(slug);
+      const res = await articlesApi.getArticle(slug);
       context.commit(mutationTypes.getArticleSuccess, res.data.article);
     } catch (error) {
       context.commit(mutationTypes.getArticleFailure, error.message);

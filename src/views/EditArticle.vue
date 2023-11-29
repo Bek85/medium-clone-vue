@@ -29,9 +29,9 @@ export default {
   computed: {
     ...mapState({
       isLoading: (state) => state.getArticle.isLoading,
-      isSubmitting: (state) => state.article.isSubmitting,
-      validationErrors: (state) => state.article.validationErrors,
-      article: (state) => state.getArticle.articleData,
+      isSubmitting: (state) => state.getArticle.isSubmitting,
+      validationErrors: (state) => state.getArticle.error,
+      article: (state) => state.getArticle.article,
     }),
     initialValues() {
       if (!this.article) {

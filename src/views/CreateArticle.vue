@@ -33,8 +33,8 @@ export default {
 
   computed: {
     ...mapState({
-      isSubmitting: (state) => state.article.isSubmitting,
-      validationErrors: (state) => state.article.validationErrors,
+      isSubmitting: (state) => state.createArticle.isSubmitting,
+      validationErrors: (state) => state.createArticle.validationErrors,
     }),
   },
 

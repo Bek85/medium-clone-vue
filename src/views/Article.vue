@@ -77,7 +77,7 @@ export default {
     ...mapState({
       isLoading: (state) => state.getArticle.isLoading,
       error: (state) => state.getArticle.error,
-      article: (state) => state.getArticle.articleData,
+      article: (state) => state.getArticle.article,
     }),
     ...mapGetters({
       currentUser: authGetterTypes.currentUser,

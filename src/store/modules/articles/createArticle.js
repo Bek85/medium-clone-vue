@@ -1,4 +1,4 @@
-import feedsApi from '@/api/articlesApi';
+import articlesApi from '@/api/articlesApi';
 import router from '@/router';
 
 const state = {
@@ -33,7 +33,7 @@ const actions = {
   async [createArticleActionTypes.createArticle](context, formData) {
     try {
       context.commit(mutationTypes.createArticleStart);
-      const { data } = await feedsApi.createArticle(formData);
+      const { data } = await articlesApi.createArticle(formData);
       const slug = data.article.slug;
       context.commit(mutationTypes.createArticleSuccess);
 
