@@ -6,7 +6,9 @@ import getArticle from '@/store/modules/articles/getArticle';
 import createArticle from '@/store/modules/articles/createArticle';
 import updateArticle from '@/store/modules/articles/updateArticle';
 import deleteArticle from '@/store/modules/articles/deleteArticle';
+import settings from '@/store/modules/settings';
 
+settings;
 export default createStore({
   state: {},
   mutations: {},
@@ -19,5 +21,6 @@ export default createStore({
     createArticle,
     updateArticle,
     deleteArticle,
+    settings,
   },
 });
