@@ -45,7 +45,7 @@
 
 <script>
 import McvValidationErrors from '@/components/ValidationErrors.vue';
-import { actionTypes } from '@/store/modules/auth';
+import { authActionTypes } from '@/store/modules/auth';
 import { mapState } from 'vuex';
 
 export default {
@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch(actionTypes.login, {
+      this.$store.dispatch(authActionTypes.login, {
         email: this.email,
         password: this.password,
       });

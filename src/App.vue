@@ -7,7 +7,7 @@
 
 <script>
 import McvTopBar from '@/components/TopBar.vue';
-import { actionTypes } from '@/store/modules/auth';
+import { authActionTypes } from '@/store/modules/auth';
 
 export default {
   name: 'McvApp',
@@ -15,7 +15,7 @@ export default {
     McvTopBar,
   },
   mounted() {
-    this.$store.dispatch(actionTypes.getCurrentUser);
+    this.$store.dispatch(authActionTypes.getCurrentUser);
   },
 };
 </script>

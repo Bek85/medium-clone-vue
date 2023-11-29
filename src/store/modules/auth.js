@@ -78,7 +78,7 @@ const mutations = {
   },
 };
 
-export const actionTypes = {
+export const authActionTypes = {
   register: '[auth] register',
   login: '[auth] login',
   getCurrentUser: '[auth] getCurrentUser',
@@ -104,7 +104,7 @@ const getters = {
 };
 
 const actions = {
-  async [actionTypes.register](context, credentials) {
+  async [authActionTypes.register](context, credentials) {
     try {
       context.commit(mutationTypes.registerStart);
 
@@ -120,7 +120,7 @@ const actions = {
     }
   },
 
-  async [actionTypes.login](context, credentials) {
+  async [authActionTypes.login](context, credentials) {
     try {
       context.commit(mutationTypes.loginStart);
 
@@ -136,7 +136,7 @@ const actions = {
     }
   },
 
-  async [actionTypes.getCurrentUser](context) {
+  async [authActionTypes.getCurrentUser](context) {
     try {
       context.commit(mutationTypes.getCurrentUserStart);
 
@@ -149,7 +149,7 @@ const actions = {
       context.commit(mutationTypes.getCurrentUserFailure);
     }
   },
-  async [actionTypes.updateCurrentUser](context, formData) {
+  async [authActionTypes.updateCurrentUser](context, formData) {
     try {
       context.commit(mutationTypes.updateCurrentUserStart);
 
