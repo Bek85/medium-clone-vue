@@ -19,6 +19,9 @@ export const mutationTypes = {
   createArticleStart: '[article] createArticleStart',
   createArticleSuccess: '[article] createArticleSuccess',
   createArticleFailure: '[article] createArticleFailure',
+  updateArticleStart: '[article] updateArticleStart',
+  updateArticleSuccess: '[article] updateArticleSuccess',
+  updateArticleFailure: '[article] updateArticleFailure',
 };
 
 const mutations = {
@@ -47,12 +50,23 @@ const mutations = {
     state.isSubmitting = false;
     state.validationErrors = payload;
   },
+  [mutationTypes.updateArticleStart](state) {
+    state.isSubmitting = true;
+  },
+  [mutationTypes.updateArticleSuccess](state) {
+    state.isSubmitting = false;
+  },
+  [mutationTypes.updateArticleFailure](state, payload) {
+    state.isSubmitting = false;
+    state.validationErrors = payload;
+  },
 };
 
 export const actionTypes = {
   getArticle: '[article] getArticle',
   deleteArticle: '[article] deleteArticle',
   createArticle: '[article] createArticle',
+  updateArticle: '[article] updateArticle',
 };
 
 const actions = {
@@ -87,6 +101,21 @@ const actions = {
     } catch (error) {
       context.commit(
         mutationTypes.createArticleFailure,
+        error.response.data.errors
+      );
+    }
+  },
+  async [actionTypes.updateArticle](context, { slug, formData }) {
+    try {
+      context.commit(mutationTypes.updateArticleStart);
+      await feedsApi.updateArticle(slug, formData);
+
+      context.commit(mutationTypes.updateArticleSuccess);
+
+      router.push({ name: 'article', params: { slug } });
+    } catch (error) {
+      context.commit(
+        mutationTypes.updateArticleFailure,
         error.response.data.errors
       );
     }
