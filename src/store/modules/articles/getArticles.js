@@ -39,7 +39,10 @@ const actions = {
       const res = await articlesApi.getArticles(apiUrl);
       context.commit(mutationTypes.getArticlesSuccess, res.data);
     } catch (error) {
-      context.commit(mutationTypes.getArticlesFailure, error.message);
+      context.commit(
+        mutationTypes.getArticlesFailure,
+        error.response.data.errors
+      );
     }
   },
 };

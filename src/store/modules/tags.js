@@ -38,7 +38,7 @@ const actions = {
       const res = await tagsApi.getPopularTags();
       context.commit(mutationTypes.getTagsSuccess, res.data.tags);
     } catch (error) {
-      context.commit(mutationTypes.getTagsFailure, error.message);
+      context.commit(mutationTypes.getTagsFailure, error.response.data.errors);
     }
   },
 };

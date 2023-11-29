@@ -30,7 +30,10 @@ const actions = {
       context.commit(mutationTypes.deleteArticleSuccess);
       router.push({ name: 'globalFeed' });
     } catch (error) {
-      context.commit(mutationTypes.deleteArticleFailure, error.message);
+      context.commit(
+        mutationTypes.deleteArticleFailure,
+        error.response.data.errors
+      );
     }
   },
 };

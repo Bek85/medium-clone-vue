@@ -21,8 +21,12 @@ export const mutationTypes = {
 
   getCurrentUserStart: '[auth] getCurrentUserStart',
   getCurrentUserSuccess: '[auth] getCurrentUserSuccess',
-  getCurrentUserFailure: '[auth] getCurrentUserFailure'
-}
+  getCurrentUserFailure: '[auth] getCurrentUserFailure',
+
+  updateCurrentUserStart: '[auth] updateCurrentUserStart',
+  updateCurrentUserSuccess: '[auth] updateCurrentUserSuccess',
+  updateCurrentUserFailure: '[auth] updateCurrentUserFailure',
+};
 
 const mutations = {
   [mutationTypes.registerStart](state) {
@@ -53,8 +57,8 @@ const mutations = {
     state.validationErrors = payload;
   },
   [mutationTypes.getCurrentUserStart](state) {
-    state.isLoading = true
-    },
+    state.isLoading = true;
+  },
   [mutationTypes.getCurrentUserSuccess](state, payload) {
     state.currentUser = payload;
     state.isLoading = false;
@@ -64,66 +68,101 @@ const mutations = {
     state.isLoading = false;
     state.isLoggedIn = false;
     state.currentUser = null;
-  }
+  },
+  [mutationTypes.updateCurrentUserStart]() {},
+  [mutationTypes.updateCurrentUserSuccess](state, payload) {
+    state.currentUser = payload;
+  },
+  [mutationTypes.updateCurrentUserFailure](state, payload) {
+    state.validationErrors = payload;
+  },
 };
 
 export const actionTypes = {
   register: '[auth] register',
   login: '[auth] login',
-  getCurrentUser: '[auth] getCurrentUser'
-}
+  getCurrentUser: '[auth] getCurrentUser',
+  updateCurrentUser: '[auth] updateCurrentUser',
+};
 
 export const getterTypes = {
   currentUser: '[auth] currentUser',
   isLoggedIn: '[auth] isLoggedIn',
-  isAnonymous: '[auth] isAnonymous'
-}
+  isAnonymous: '[auth] isAnonymous',
+};
 
 const getters = {
-  [getterTypes.currentUser]: state => {
+  [getterTypes.currentUser]: (state) => {
     return state.currentUser;
   },
-  [getterTypes.isLoggedIn]: state => {
+  [getterTypes.isLoggedIn]: (state) => {
     return Boolean(state.isLoggedIn);
   },
-  [getterTypes.isAnonymous]: state => {
+  [getterTypes.isAnonymous]: (state) => {
     return state.isLoggedIn === false;
-  }
-}
+  },
+};
 
 const actions = {
   async [actionTypes.register](context, credentials) {
     try {
       context.commit(mutationTypes.registerStart);
+
       const res = await authApi.register(credentials);
+
       context.commit(mutationTypes.registerSuccess, res.data.user);
+
       setItem('accessToken', res.data.user.token);
+
       router.push({ name: 'globalFeed' });
     } catch (error) {
       context.commit(mutationTypes.registerFailure, error.response.data.errors);
     }
   },
 
-   async [actionTypes.login](context, credentials) {
+  async [actionTypes.login](context, credentials) {
     try {
       context.commit(mutationTypes.loginStart);
+
       const res = await authApi.login(credentials);
+
       context.commit(mutationTypes.loginSuccess, res.data.user);
+
       setItem('accessToken', res.data.user.token);
+
       router.push({ name: 'globalFeed' });
     } catch (error) {
       context.commit(mutationTypes.loginFailure, error.response.data.errors);
     }
   },
 
-   async [actionTypes.getCurrentUser](context) {
+  async [actionTypes.getCurrentUser](context) {
     try {
       context.commit(mutationTypes.getCurrentUserStart);
+
       const res = await authApi.getCurrentUser();
+
       context.commit(mutationTypes.getCurrentUserSuccess, res.data.user);
+
       router.push({ name: 'globalFeed' });
     } catch {
       context.commit(mutationTypes.getCurrentUserFailure);
+    }
+  },
+  async [actionTypes.updateCurrentUser](context, formData) {
+    try {
+      context.commit(mutationTypes.updateCurrentUserStart);
+
+      const res = await authApi.updateCurrentUser(formData);
+
+      context.commit(mutationTypes.updateCurrentUserSuccess, res.data.user);
+
+      router.push({ name: 'globalFeed' });
+    } catch (error) {
+      context.commit(
+        mutationTypes.updateCurrentUserFailure,
+        error.response.data.errors
+      );
     }
   },
 };
@@ -132,5 +171,5 @@ export default {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };
