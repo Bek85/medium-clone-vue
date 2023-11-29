@@ -61,9 +61,10 @@
 import McvErrorMessage from '@/components/ErrorMessage.vue';
 import McvSpinner from '@/components/Spinner.vue';
 import McvTagList from '@/components/TagList.vue';
-import { actionTypes as articleActionType } from '@/store/modules/article';
+import { getArticleActionTypes } from '@/store/modules/articles/getArticle';
 import { mapState, mapGetters } from 'vuex';
 import { getterTypes as authGetterTypes } from '@/store/modules/auth';
+import { deleteArticleActionTypes } from '@/store/modules/articles/deleteArticle';
 
 export default {
   name: 'McvArticle',
@@ -74,9 +75,9 @@ export default {
   },
   computed: {
     ...mapState({
-      isLoading: (state) => state.article.isLoading,
-      error: (state) => state.article.error,
-      article: (state) => state.article.articleData,
+      isLoading: (state) => state.getArticle.isLoading,
+      error: (state) => state.getArticle.error,
+      article: (state) => state.getArticle.articleData,
     }),
     ...mapGetters({
       currentUser: authGetterTypes.currentUser,
@@ -88,13 +89,13 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch(articleActionType.getArticle, {
+    this.$store.dispatch(getArticleActionTypes.getArticle, {
       slug: this.$route.params.slug,
     });
   },
   methods: {
     deleteArticle() {
-      this.$store.dispatch(articleActionType.deleteArticle, {
+      this.$store.dispatch(deleteArticleActionTypes.deleteArticle, {
         slug: this.$route.params.slug,
       });
     },

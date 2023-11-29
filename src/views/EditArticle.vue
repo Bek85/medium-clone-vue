@@ -13,9 +13,12 @@
 
 <script>
 import McvArticleForm from '@/components/ArticleForm.vue';
-import { actionTypes } from '@/store/modules/article';
+import { getArticleActionTypes } from '@/store/modules/articles/getArticle';
+
 import { mapState } from 'vuex';
 import McvSpinner from '@/components/Spinner.vue';
+
+import { updateArticleActionTypes } from '@/store/modules/articles/updateArticle';
 
 export default {
   name: 'McvEditArticle',
@@ -26,10 +29,10 @@ export default {
 
   computed: {
     ...mapState({
-      isLoading: (state) => state.article.isLoading,
+      isLoading: (state) => state.getArticle.isLoading,
       isSubmitting: (state) => state.article.isSubmitting,
       validationErrors: (state) => state.article.validationErrors,
-      article: (state) => state.article.articleData,
+      article: (state) => state.getArticle.articleData,
     }),
     initialValues() {
       if (!this.article) {
@@ -45,7 +48,7 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch(actionTypes.getArticle, {
+    this.$store.dispatch(getArticleActionTypes.getArticle, {
       slug: this.$route.params.slug,
     });
   },
@@ -53,7 +56,10 @@ export default {
   methods: {
     onSubmit(formData) {
       const slug = this.$route.params.slug;
-      this.$store.dispatch(actionTypes.updateArticle, { slug, formData });
+      this.$store.dispatch(updateArticleActionTypes.updateArticle, {
+        slug,
+        formData,
+      });
     },
   },
 };

@@ -11,11 +11,11 @@
 
 <script>
 import McvArticleForm from '@/components/ArticleForm.vue';
-import { actionTypes } from '@/store/modules/article';
+import { createArticleActionTypes } from '@/store/modules/articles/createArticle';
 import { mapState } from 'vuex';
 
 export default {
-  name: 'MvcCreateArticle',
+  name: 'McvCreateArticle',
   components: {
     McvArticleForm,
   },
@@ -40,7 +40,7 @@ export default {
 
   methods: {
     onSubmit(data) {
-      this.$store.dispatch(actionTypes.createArticle, data);
+      this.$store.dispatch(createArticleActionTypes.createArticle, data);
     },
   },
 };
