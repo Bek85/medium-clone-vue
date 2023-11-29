@@ -21,7 +21,7 @@ const createArticle = (formData) => {
 };
 
 const updateArticle = (slug, formData) => {
-  return api.put(`${URLS.articleUrl}/${slug}`, formData);
+  return api.put(`${URLS.articleUrl}/${slug}`, { article: formData });
 };
 
 export default {

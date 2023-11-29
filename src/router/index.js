@@ -57,7 +57,8 @@ const routes = [
   {
     path: '/articles/:slug/edit',
     name: 'editArticle',
-    component: GlobalFeed,
+    component: () =>
+      import(/* webpackChunkName: "editArticle" */ '@/views/EditArticle.vue'),
   },
   {
     path: '/settings',
