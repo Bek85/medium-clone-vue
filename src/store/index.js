@@ -7,6 +7,7 @@ import createArticle from '@/store/modules/articles/createArticle';
 import updateArticle from '@/store/modules/articles/updateArticle';
 import deleteArticle from '@/store/modules/articles/deleteArticle';
 import settings from '@/store/modules/settings';
+import addToFavorites from '@/store/modules/articles/addToFavorites';
 
 settings;
 export default createStore({
@@ -22,5 +23,6 @@ export default createStore({
     updateArticle,
     deleteArticle,
     settings,
+    addToFavorites,
   },
 });

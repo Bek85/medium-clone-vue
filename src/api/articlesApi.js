@@ -24,10 +24,22 @@ const updateArticle = (slug, formData) => {
   return api.put(`${URLS.articleUrl}/${slug}`, { article: formData });
 };
 
+// add to favorites function
+const addToFavorites = (slug) => {
+  return api.post(`${URLS.articleUrl}/${slug}/favorite`);
+};
+
+// remove from favorites function
+const removeFromFavorites = (slug) => {
+  return api.delete(`${URLS.articleUrl}/${slug}/favorite`);
+};
+
 export default {
   getArticles,
   getArticle,
   deleteArticle,
   createArticle,
   updateArticle,
+  addToFavorites,
+  removeFromFavorites,
 };
