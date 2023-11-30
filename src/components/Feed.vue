@@ -109,6 +109,9 @@ export default {
     currentPage() {
       this.fetchArticles();
     },
+    apiUrl() {
+      this.fetchArticles();
+    },
   },
 
   mounted() {
