@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import GlobalFeed from '@/views/GlobalFeed.vue';
-// import TagFeed from '@/views/TagFeed.vue';
-// import YourFeed from '@/views/YourFeed.vue';
 
 const routes = [
   {
@@ -69,12 +66,16 @@ const routes = [
   {
     path: '/profiles/:slug',
     name: 'userProfile',
-    component: GlobalFeed,
+    component: () =>
+      import(/* webpackChunkName: "userProfile" */ '@/views/UserProfile.vue'),
   },
   {
     path: '/profiles/:slug/favorites',
     name: 'userProfileFavorites',
-    component: GlobalFeed,
+    component: () =>
+      import(
+        /* webpackChunkName: "user favorites" */ '@/views/UserProfile.vue'
+      ),
   },
 ];
 

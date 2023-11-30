@@ -5,7 +5,7 @@ const URLS = {
 };
 
 const getUserProfile = (slug) => {
-  return api.post(`${URLS.userProfileUrl}/${slug}`);
+  return api.get(`${URLS.userProfileUrl}/${slug}`);
 };
 
 export default {

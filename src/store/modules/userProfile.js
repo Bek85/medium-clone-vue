@@ -1,4 +1,4 @@
-import userProfile from '@/api/userProfile';
+import userProfile from '@/api/userProfileApi';
 
 const state = {
   userProfile: null,
@@ -12,7 +12,7 @@ export const mutationTypes = {
   getUserProfileFailure: '[userProfile] Get userProfile failure',
 };
 
-export const actionTypes = {
+export const userProfileActionTypes = {
   getUserProfile: '[userProfile] Get userProfile',
 };
 
@@ -32,7 +32,7 @@ const mutations = {
 };
 
 const actions = {
-  [actionTypes.getUserProfile](context, { slug }) {
+  [userProfileActionTypes.getUserProfile](context, { slug }) {
     return new Promise((resolve) => {
       context.commit(mutationTypes.getUserProfileStart);
       userProfile

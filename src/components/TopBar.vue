@@ -25,7 +25,7 @@
             <router-link
               class="nav-link"
               :to="{
-                name: 'globalFeed',
+                name: 'userProfile',
                 params: { slug: currentUser.username },
               }"
             >
