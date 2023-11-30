@@ -1,24 +1,34 @@
 # medium-clone
 
 ## Project setup
+
 ```
-npm install
+yarn
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
-npm run serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
+
 ```
-npm run build
+yarn build
 ```
 
 ### Lints and fixes files
+
 ```
-npm run lint
+yarn lint
 ```
 
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### TODO
+
+1. Create a feature to follow a user and add a particular article to favorites and vice versa.
+2. Create a feature to add and delete a comment for a particular article
