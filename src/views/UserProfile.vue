@@ -99,10 +99,22 @@ export default {
     },
   },
 
+  watch: {
+    userProfileSlug() {
+      this.fetchUserProfile();
+    },
+  },
+
+  methods: {
+    fetchUserProfile() {
+      this.$store.dispatch(userProfileActionTypes.getUserProfile, {
+        slug: this.userProfileSlug,
+      });
+    },
+  },
+
   mounted() {
-    this.$store.dispatch(userProfileActionTypes.getUserProfile, {
-      slug: this.userProfileSlug,
-    });
+    this.fetchUserProfile();
   },
 };
 </script>
